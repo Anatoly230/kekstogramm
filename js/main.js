@@ -5,7 +5,7 @@ function getValueOfArguments(from, to) {
         from = Math.abs(from);
     }
     if (from > to) {
-        [from, to] = [to, from]
+        [from, to] = [to, from];
     }
 
     return {
@@ -15,13 +15,24 @@ function getValueOfArguments(from, to) {
 }
 
 function getRandomNum(from = 1000, to = 0) {
-    let range = getValueOfArguments(from, to);
-    return Math.floor(Math.random() * (range.to - range.from + 1)) + range.from;
+    try {
+        let range = getValueOfArguments(from, to);
+        return Math.floor(Math.random() * (range.to - range.from + 1)) + range.from;
+    } catch (err) {
+        console.log(err)
+        return false;
+    }
+
 }
 
 function getRandomFloat(from = 1000, to = 0, countNum = 3) {
-    let range = getValueOfArguments(from, to);
-    return Number((Math.random() * (range.to - range.from + 1) + range.from).toFixed(countNum));
+    try {
+        let range = getValueOfArguments(from, to);
+        return Number((Math.random() * (range.to - range.from + 1) + range.from).toFixed(countNum));
+    } catch (err) {
+        console.log(err.stack);
+        return false;
+    }
 }
 
 getRandomNum(3, 0);
@@ -32,3 +43,21 @@ function defineStringLength(str, charCount) {
     }
     return true;
 }
+
+let arr = ["привет",  "как", "дела?"]
+console.log(arr["2-2"])
+
+function makeCount(){
+    let count = 0,
+    str = "Привет, я лексическое окружение функции, которые возвращает эта, изменений "
+    return function (){
+        console.log(count++, str + count)
+    }
+}
+
+let counter = makeCount();
+// makeCount()();
+// makeCount()();
+counter();
+counter();
+console.log(Number.hasOwnProperty(parseInt))
