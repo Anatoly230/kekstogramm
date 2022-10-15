@@ -1,6 +1,9 @@
 console.log("hi")
 
 function getValueOfArguments(from, to) {
+    if (typeof from !== "number") {
+        return false;
+    }
     if (from < 0) {
         from = Math.abs(from);
     }
