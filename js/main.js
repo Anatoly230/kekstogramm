@@ -1,5 +1,3 @@
-console.log("hi")
-
 function getValueOfArguments(from, to) {
   if (typeof from !== "number") {
     return false;
@@ -44,7 +42,6 @@ function getRandomFloat(from = 1000, to = 0, countNum = 3) {
   }
 }
 
-getRandomNum(3, 0);
 
 function defineStringLength(str, charCount) {
   if (str.length > charCount) {
