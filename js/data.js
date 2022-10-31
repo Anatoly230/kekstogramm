@@ -1,4 +1,4 @@
-// входные данные
+import {getRangeNumbers,arrayCopy,detachFromArray, selectFromArray, getRandomNum } from "./utils.js";
 const MESSAGES = [
     "Всё отлично!",
     "В целом всё неплохо. Но не всё.",
@@ -60,70 +60,6 @@ const MESSAGES = [
     IMG_IDS = getRangeNumbers(1, 25),
     USER_IDS = getRangeNumbers(1, 200 * 15);
 
-// входные данные
-
-
-// создать функцию которая генерирует массив с числами в диапазоне от и до
-function getRangeNumbers(from = 1, to = 25) {
-    let range = getValueOfArguments(from, to);
-    from = range.from;
-    to = range.to;
-    range = [];
-    try {
-        while (from <= to) {
-            range.push(from)
-            from++
-        }
-        return range;
-    }
-    catch (err) {
-        console.log(err)
-    }
-}
-
-function arrayClone(arr) {
-    return arr.map(function (item) {
-        return item;
-    })
-}
-
-function arrayCopy(instance, target) {
-    target.length = 0;
-    for (let i = 0; i < instance.length; i++) {
-        target[i] = instance[i];
-    }
-    return target;
-}
-
-function arrayScatter(arr) {
-    arr = arrayClone(arr),
-        result = [];
-    while (arr.length > 0) {
-        result.push(...arr.splice(getRandomNum(0, arr.length)))
-    }
-    arr = null;
-    return result;
-}
-
-
-function detachFromArray(array) {
-    if (array.length < 1) {
-        array = null;
-        return false;
-    }
-    let index = getRandomNum(0, array.length - 1);
-    return array.splice(index, 1)[0];
-}
-
-function selectFromArray(array) {
-    if (array.length < 1) {
-        array = null;
-        return false;
-    }
-    let index = getRandomNum(0, array.length - 1);
-    return array[index];
-}
-
 function infoCollect() {
     let data = {
         ids: getRangeNumbers(1, 25),
@@ -181,5 +117,4 @@ function getComment() {
     }
 }
 
-
-
+export {getPhotos};
