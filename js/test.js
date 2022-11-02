@@ -147,13 +147,16 @@ function infoCollect() {
     return data;
 }
 
-function getPhotos(length = 25) {
+function getObjects(callBack, length = 25) {
     try {
+      if (callBack === undefined) {
+        throw new Error("Необхлдимо добавить функцию конструткор")
+      }
         arrayCopy(getRangeNumbers(1, length), IMG_IDS);
         if (typeof length === "object" || Number(length) !== Number(length) || Number(length) === 0) {
             throw new Error("Ошибка ввода данных, должно быть число не меньше 1")
         }
-        return Array.from({ length: length }, getPhotoInfo);
+        return Array.from({ length: length }, callBack);
     } catch (err) {
         console.log(err)
     }
