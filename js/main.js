@@ -1,9 +1,23 @@
 
 import { addPhotos } from "./rendering.js";
-import { fullScreen } from "./fullscreen-pic.js";
+import { rawPhotoData } from "./data.js";
+// import { fullScreen } from "./fullscreen-pic.js";
 
-addPhotos(5)
+addPhotos();
 
+function searchPhotoId(array, id) {
+  for (let item of array) {
+    if (item.id === id) {
+      return item.comments;
+    }
+  }
+}
+
+// function showComments(array){
+
+// }
+
+console.log(searchPhotoId(rawPhotoData, 2))
 
 function FullScreenView() {
   let fullViewImage = document.querySelector(".big-picture");
@@ -14,9 +28,12 @@ function FullScreenView() {
   fullViewImage.querySelector(".comments-count").textContent = this.querySelector(".picture__comments").textContent;
   console.log(fullViewImage)
   console.log(this)
+  console.log(rawPhotoData)
 }
-
 const image = document.querySelector(".picture");
+
+
+
 
 image.addEventListener("click", FullScreenView)
 

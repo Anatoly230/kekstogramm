@@ -1,24 +1,23 @@
-import { getPhotoInfo } from "./data.js"
-import { getRandomNum, getObjects } from "./utils.js"
+import { rawPhotoData } from "./data.js"
 
 const pictures = document.querySelector(".pictures"),
   template = document.querySelector("#picture").content.querySelector(".picture");
 
-function addPhotos(count = 25) {
+function addPhotos() {
   let elementStorage = document.createDocumentFragment(),
-    rawPhotoData = getObjects(getPhotoInfo, count),
     photoObj,
     comment;
 
-  rawPhotoData.forEach(function ({ url, likes, comments}) {
+  rawPhotoData.forEach(function ({ url, likes, comments, id}) {
     photoObj = template.cloneNode(true);
     comment = comments.length;
     photoObj.querySelector(".picture__img").src = url;
     photoObj.querySelector(".picture__likes").textContent = likes;
     photoObj.querySelector(".picture__comments").textContent = comment;
+    photoObj.querySelector(".picture__comments").dataset.id = id;
     elementStorage.appendChild(photoObj);
   })
   pictures.appendChild(elementStorage);
 }
 
-export { addPhotos };
+export {addPhotos };

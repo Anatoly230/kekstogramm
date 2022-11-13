@@ -1,4 +1,6 @@
-import { getRangeNumbers, arrayCopy, detachFromArray, selectFromArray, getRandomNum } from "./utils.js";
+import { getRangeNumbers, arrayCopy, detachFromArray, selectFromArray, getRandomNum , getObjects} from "./utils.js";
+const countPhotos = 25;
+
 const MESSAGES = [
   "Всё отлично!",
   "В целом всё неплохо. Но не всё.",
@@ -85,4 +87,6 @@ function getComment() {
     name: selectFromArray(NAMES),
   }
 }
-export { getPhotoInfo };
+
+const rawPhotoData = getObjects(getPhotoInfo, countPhotos);
+export { rawPhotoData };
