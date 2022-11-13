@@ -3,7 +3,7 @@ import { addPhotos } from "./rendering.js";
 import { rawPhotoData } from "./data.js";
 // import { fullScreen } from "./fullscreen-pic.js";
 
-addPhotos();
+// addPhotos();
 
 function searchPhotoId(array, id) {
   for (let item of array) {
