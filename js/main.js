@@ -1,9 +1,14 @@
 
-import { addPhotos } from "./rendering.js";
+import { addToDOM } from "./rendering.js";
 import { rawPhotoData } from "./data.js";
 // import { fullScreen } from "./fullscreen-pic.js";
 
-// addPhotos();
+let changeInfo = [
+  {class: ".picture__img", target: "src", source: "url"},
+   {class: ".picture__likes", target: "textContent", source: "likes"},
+   {class: ".picture__comments", target: "textContent", source: "comments", property: "length"},
+   {class: ".picture__comments", target: "dataset.id", source: "id"}
+  ]
 
 function searchPhotoId(array, id) {
   for (let item of array) {
@@ -13,13 +18,13 @@ function searchPhotoId(array, id) {
   }
 }
 
-// function showComments(array){
+function showComments(array){
 
-// }
+}
 
 console.log(searchPhotoId(rawPhotoData, 2))
 
-function FullScreenView() {
+function fullScreenView() {
   let fullViewImage = document.querySelector(".big-picture");
   fullViewImage.classList.toggle("hidden");
 
@@ -30,10 +35,13 @@ function FullScreenView() {
   console.log(this)
   console.log(rawPhotoData)
 }
+
+
 const image = document.querySelector(".picture");
 
 
+eval("console.log(rawPhotoData[0].comments[0]['avatar'])")
 
 
-image.addEventListener("click", FullScreenView)
+// image.addEventListener("click", fullScreenView)
 

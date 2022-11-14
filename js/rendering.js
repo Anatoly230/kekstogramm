@@ -3,43 +3,38 @@ import { rawPhotoData } from "./data.js"
 const pictures = document.querySelector(".pictures"),
   template = document.querySelector("#picture").content.querySelector(".picture");
 
-function addPhotos() {
-  let elementStorage = document.createDocumentFragment(),
-    photoObj,
-    comment;
 
-  rawPhotoData.forEach(function ({ url, likes, comments, id }) {
-    photoObj = template.cloneNode(true);
-    comment = comments.length;
-    photoObj.querySelector(".picture__img").src = url;
-    photoObj.querySelector(".picture__likes").textContent = likes;
-    photoObj.querySelector(".picture__comments").textContent = comment;
-    photoObj.querySelector(".picture__comments").dataset.id = id;
-    elementStorage.appendChild(photoObj);
-  })
-  pictures.appendChild(elementStorage);
-}
-
-function addToDOM(parent, datas, arrayClassAndValues) {
+function addToDOM(parent, datas, classesAndValues) {
   let elementStorage = document.createDocumentFragment(),
-    obj;
+    obj,
+    target,
+    source;
   datas.forEach(function (data) {
     obj = template.cloneNode(true);
-    arrayClassAndValues.forEach(function (item) {
-      obj.querySelector(item.class)[item.target] = data[item.source]
+    classesAndValues.forEach(function (item) {
+      target = testProperty(item.target);
+      source = testProperty(item.source);
+       console.log(target, source)
+      obj.querySelector(item.class).eval(target) = eval(source);
     })
-    elementStorage.appendChild(obj)
+    // elementStorage.appendChild(obj)
   })
-  parent.appendChild(elementStorage)
-}
+  // parent.appendChild(elementStorage)
+};
 
 let changeInfo = [
-  {class: ".picture__img", target: "src", source: "url"},
-   {class: ".picture__likes", target: "textContent", source: "likes"},
-  //  {class: ".picture__comments", target: "textContent", source: "comment"},
-   {class: ".picture__comments", target: "dataset.id", source: "id"}
-  ]
+  { class: ".picture__img", target: { path: "src" }, source: "url" },
+  { class: ".picture__likes", target: { path: "textContent" }, source: "likes" },
+  { class: ".picture__comments", target: { path: "textContent" }, source: { path: "comments", property: "length" } },
+  { class: ".picture__comments", target: { path: "dataset", property: "id" }, source: "id" }
+]
 
-// addToDOM(pictures, rawPhotoData, changeInfo)
+function testProperty(obj) {
+  if (typeof (obj) === "object") {
+    return Object.values(obj).join(".");
+  }
+  return obj;
+}
+addToDOM(pictures, rawPhotoData, changeInfo);
 
-export { addPhotos };
+export { addToDOM };
