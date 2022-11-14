@@ -82,7 +82,7 @@ function getComment() {
   let temp = detachFromArray(USER_IDS)
   return {
     id: temp,
-    avatar: URLS[1] + temp + EXTISIONS[1],
+    avatar: URLS[1] + getRandomNum(1,6) + EXTISIONS[1],
     message: selectFromArray(DESCRIPTIONS),
     name: selectFromArray(NAMES),
   }

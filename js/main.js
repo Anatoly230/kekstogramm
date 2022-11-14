@@ -3,45 +3,53 @@ import { addToDOM } from "./rendering.js";
 import { rawPhotoData } from "./data.js";
 // import { fullScreen } from "./fullscreen-pic.js";
 
-let changeInfo = [
-  {class: ".picture__img", target: "src", source: "url"},
-   {class: ".picture__likes", target: "textContent", source: "likes"},
-   {class: ".picture__comments", target: "textContent", source: "comments", property: "length"},
-   {class: ".picture__comments", target: "dataset.id", source: "id"}
-  ]
+const commentsInfo = [
+  { class: ".social__picture", target: "src", source: "avatar" },
+  { class: ".social__picture", target: "alt", source: "name" },
+  { class: ".social__picture", target: "width", source: ["35"] },
+  { class: ".social__picture", target: "height", source: ["35"] },
+  { class: ".social__text", target: "textContent", source: "message" },
+
+]
+
+console.log(rawPhotoData[0].comments)
 
 function searchPhotoId(array, id) {
   for (let item of array) {
-    if (item.id === id) {
-      return item.comments;
+    if (item.id === Number(id)) {
+      return item;
     }
   }
 }
 
-function showComments(array){
+function showComments(array) {
 
 }
 
-console.log(searchPhotoId(rawPhotoData, 2))
-
-function fullScreenView() {
+function fullScreenViewOPen() {
   let fullViewImage = document.querySelector(".big-picture");
-  fullViewImage.classList.toggle("hidden");
+  const commentTemplate = fullViewImage.querySelector(".social__comment");
+  const commentHome = fullViewImage.querySelector(".social__comments");
 
+  let photoId = this.querySelector(".picture__comments").dataset.id;
+  let photoInfo = searchPhotoId(rawPhotoData, photoId)
+  fullViewImage.classList.toggle("hidden");
   fullViewImage.querySelector("img").src = this.querySelector(".picture__img").src;
   fullViewImage.querySelector(".likes-count").textContent = this.querySelector(".picture__likes").textContent;
   fullViewImage.querySelector(".comments-count").textContent = this.querySelector(".picture__comments").textContent;
-  console.log(fullViewImage)
-  console.log(this)
-  console.log(rawPhotoData)
+  fullViewImage.querySelector(".social__caption").textContent = photoInfo.description;
+  fullViewImage.querySelector(".social__comments").innerHTML = "";
+  fullViewImage.querySelector(".social__comment-count").classList.toggle("hidden");
+addToDOM(commentHome,commentTemplate,photoInfo.comments,commentsInfo);
+document.querySelector("body").classList.toggle("modal-open")
 }
 
 
-const image = document.querySelector(".picture");
 
+const images = document.querySelectorAll(".picture");
 
-eval("console.log(rawPhotoData[0].comments[0]['avatar'])")
+images.forEach(function (image) {
+  image.addEventListener("click", fullScreenViewOPen)
+})
 
-
-// image.addEventListener("click", fullScreenView)
 
