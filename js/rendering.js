@@ -13,7 +13,7 @@ const changeInfo = [
 
 function getOut(start, path) {
   if(Array.isArray(path)){
-    return path[0]
+    return path[0];
   }
   let current = start;
   path.split(".").forEach(function (item) {
