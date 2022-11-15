@@ -12,7 +12,7 @@ const changeInfo = [
 
 
 function getOut(start, path) {
-  if(Array.isArray(path)){
+  if (Array.isArray(path)) {
     return path[0];
   }
   let current = start;
@@ -35,6 +35,16 @@ function assignToElement(start, path, value) {
   }
 }
 
+
+function changeDOM(parent, datas, classesAndValues) {
+  datas.forEach(function (data) {
+    classesAndValues.forEach(function (item) {
+      value = getOut(data, item.source);
+      assignToElement(parent.querySelector(item.class), item.target, value);
+    })
+  })
+}
+
 function addToDOM(parent, sample, datas, classesAndValues) {
   let elementStorage = document.createDocumentFragment(),
     element,
@@ -52,5 +62,5 @@ function addToDOM(parent, sample, datas, classesAndValues) {
 
 addToDOM(pictures, template, rawPhotoData, changeInfo);
 
-export { addToDOM };
+export { addToDOM, changeDOM };
 
