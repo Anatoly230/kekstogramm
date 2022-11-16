@@ -41,22 +41,6 @@ function fillComments(data) {
   addToDOM(commentHome, commentTemplate, data.comments, commentsInfo);
 }
 
-// function findParent(e, clas) {
-//   let parent = e.target;
-//   let tubmler = parent.classList.contains(clas);
-//   let counter = 0;
-//   if (e.target.closest(`.${clas}`)) {
-//     while (!tubmler) {
-//       parent = e.target.parentElement;
-//       tubmler = parent.classList.contains(clas);
-//       counter++;
-//       console.log(parent)
-
-//     }
-//     console.log(parent)
-//   }
-//   return parent;
-// }
 
 function fullScreenViewOPen(e) {
   const self = this,
@@ -78,9 +62,25 @@ function escapeClose(e) {
   }
 }
 
+function findParent(e, parentClass = "picture") {
+  if (e.target.closest(`.${parentClass}`)) {
+    let parent = e.target;
+    let tubmler = parent.classList.contains(parentClass);
+    let counter = 0;
+    while (!tubmler) {
+      parent = parent.parentElement;
+      tubmler = parent.classList.contains(parentClass);
+      counter++;
+    }
+    return parent;
+  }
+  return e.terget;
+}
+
 
 images.forEach(function (image) {
   image.addEventListener("click", fullScreenViewOPen)
+  image.addEventListener("click", findParent)
 })
 
 cancelBtn.addEventListener("click", closeFullView)
