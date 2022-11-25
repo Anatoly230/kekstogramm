@@ -10,7 +10,16 @@ const fullViewImage = document.querySelector(".big-picture"),
     { class: ".social__picture", target: "width", source: ["35"] },
     { class: ".social__picture", target: "height", source: ["35"] },
     { class: ".social__text", target: "textContent", source: "message" },
-  ];
+  ],
+  pictureContainer = document.querySelector(".pictures"),
+  modalOpen = fullView(fullViewImage),
+  modalClose = closeFullView(fullViewImage);
+let currentPicture;
+
+
+function IsEscape(e) {
+  return e.key === "Escape";
+}
 
 function searchPhotoId(array, id) {
   for (let item of array) {
@@ -20,14 +29,24 @@ function searchPhotoId(array, id) {
   }
 }
 
-function modalOpen() {
-  fullViewImage.classList.remove("hidden");
-  fullViewImage.querySelector(".social__comment-count").classList.add("hidden");
-  fullViewImage.querySelector(".social__comments-loader").classList.add("hidden");
-  document.querySelector("body").classList.add("modal-open");
+function fullView(goal) {
+  return function () {
+    goal.classList.remove("hidden");
+    document.querySelector("body").classList.add("modal-open");
+  }
 }
 
+function closeFullView(goal) {
+  return function () {
+    goal.classList.add("hidden");
+    document.querySelector("body").classList.remove("modal-open");
+  }
+}
+
+
 function fillData(sourceObj, data) {
+  fullViewImage.querySelector(".social__comment-count").classList.add("hidden");
+  fullViewImage.querySelector(".social__comments-loader").classList.add("hidden");
   fullViewImage.querySelector("img").src = sourceObj.querySelector(".picture__img").src;
   fullViewImage.querySelector(".likes-count").textContent = sourceObj.querySelector(".picture__likes").textContent;
   fullViewImage.querySelector(".comments-count").textContent = sourceObj.querySelector(".picture__comments").textContent;
@@ -42,48 +61,49 @@ function fillComments(data) {
 }
 
 
-function fullScreenViewOPen(e) {
-  const self = this,
-    photoId = this.querySelector(".picture__comments").dataset.id,
+function onFullScreenViewOPen(elem) {
+  const photoId = elem.querySelector(".picture__comments").dataset.id,
     photoInfo = searchPhotoId(rawPhotoData, photoId)
-  fillData(self, photoInfo);
+  fillData(elem, photoInfo);
   fillComments(photoInfo)
   modalOpen();
+  cancelBtn.addEventListener("click", onFullScreenViewClose);
+  document.querySelector("body").addEventListener("keydown", escapeClose);
 }
 
-function closeFullView() {
-  fullViewImage.classList.add("hidden");
-  document.querySelector("body").classList.remove("modal-open");
+function onFullScreenViewClose() {
+  modalClose();
+  currentPicture.removeEventListener("click", onFullScreenViewOPen)
+  cancelBtn.removeEventListener("click", onFullScreenViewClose);
+  document.querySelector("body").removeEventListener("keydown", escapeClose)
 }
 
 function escapeClose(e) {
-  if (e.key === "Escape") {
-    closeFullView();
+  if (IsEscape(e)) {
+    e.preventDefault();
+    onFullScreenViewClose();
   }
 }
 
-function findParent(e, parentClass = "picture") {
-  if (e.target.closest(`.${parentClass}`)) {
-    let parent = e.target;
-    let tubmler = parent.classList.contains(parentClass);
-    let counter = 0;
-    while (!tubmler) {
-      parent = parent.parentElement;
-      tubmler = parent.classList.contains(parentClass);
-      counter++;
-    }
-    return parent;
+pictureContainer.addEventListener("click", function (e) {
+  currentPicture = findTargetElem(e, "picture");
+  if (currentPicture !== null) {
+    onFullScreenViewOPen(currentPicture)
   }
-  return e.terget;
-}
-
-
-images.forEach(function (image) {
-  image.addEventListener("click", fullScreenViewOPen)
-  image.addEventListener("click", findParent)
 })
 
-cancelBtn.addEventListener("click", closeFullView)
-document.querySelector("body").addEventListener("keydown", escapeClose)
+function findTargetElem(e, parentClass) {
+  const targetElem = e.target.closest(`.${parentClass}`)
+  return targetElem;
+}
 
-export { fullViewImage };
+
+// images.forEach(function (image) {
+//   image.addEventListener("click", onFullScreenViewOPen)
+// })
+
+
+
+
+
+export { fullView, closeFullView, IsEscape };

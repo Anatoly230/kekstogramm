@@ -1,4 +1,5 @@
-
 import { addToDOM } from "./rendering.js";
 import { rawPhotoData } from "./data.js";
-import { fullViewImage } from "./fullscreen-pic.js";
+import { fullView } from "./fullscreen-pic.js";
+import { file } from "./form-processing.js";
+
