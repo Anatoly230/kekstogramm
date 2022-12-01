@@ -1,5 +1,5 @@
 function getValueOfArguments(from, to) {
-  if (typeof from !== "number") {
+  if (typeof from !== 'number') {
     return false;
   }
   if (from < 0) {
@@ -111,10 +111,10 @@ function selectFromArray(array) {
 function getObjects(callBack, length = 25) {
   try {
     if (callBack === undefined) {
-      throw new Error("Необходимо добавить функцию конструткор")
+      throw new Error('Необходимо добавить функцию конструткор')
     }
-    if (typeof length === "object" || Number(length) !== Number(length) || Number(length) === 0) {
-      throw new Error("Ошибка ввода данных, должно быть число не меньше 1")
+    if (typeof length === 'object' || Number(length) !== Number(length) || Number(length) === 0) {
+      throw new Error('Ошибка ввода данных, должно быть число не меньше 1')
     }
     return Array.from({ length: length }, callBack);
   } catch (err) {
