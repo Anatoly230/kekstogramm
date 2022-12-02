@@ -1,4 +1,4 @@
-import { getRangeNumbers, arrayCopy, detachFromArray, selectFromArray, getRandomNum , getObjects} from './utils.js';
+import { getRangeNumbers, arrayCopy, detachFromArray, selectFromArray, getRandomNum, getObjects } from './utils.js';
 const countPhotos = 25;
 
 const MESSAGES = [
@@ -7,7 +7,7 @@ const MESSAGES = [
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ],
   NAMES = [
     'Толя',
@@ -79,13 +79,13 @@ function getPhotoInfo() {
 }
 
 function getComment() {
-  let temp = detachFromArray(USER_IDS)
+  let temp = detachFromArray(USER_IDS);
   return {
     id: temp,
-    avatar: URLS[1] + getRandomNum(1,6) + EXTISIONS[1],
+    avatar: URLS[1] + getRandomNum(1, 6) + EXTISIONS[1],
     message: selectFromArray(DESCRIPTIONS),
     name: selectFromArray(NAMES),
-  }
+  };
 }
 
 const rawPhotoData = getObjects(getPhotoInfo, countPhotos);

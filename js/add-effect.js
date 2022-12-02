@@ -2,7 +2,7 @@ import { image } from './image-resize.js';
 // import { noUiSlider } from './nouislider/nouislider.js';
 
 const slider = document.querySelector('.effect-level__slider');
-console.log(slider)
+
 
 
 noUiSlider.create(slider, {
@@ -17,16 +17,10 @@ noUiSlider.create(slider, {
 
 });
 
-// let sliderToggle = slider.querySelector('.noUi-handle');
-
-
-
 slider.noUiSlider.on('change', function (values) {
   console.log(slider.noUiSlider.get())
   console.log(effectsList)
 })
-
-
 
 const effectsList = document.querySelector('.effects__list');
 
