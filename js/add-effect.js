@@ -1,16 +1,32 @@
 import { image } from './image-resize.js';
-// import { nouislider } from './nouislider/nouislider.js';
+// import { noUiSlider } from './nouislider/nouislider.js';
 
-const slider = document.getElementById('slider');
+const slider = document.querySelector('.effect-level__slider');
+console.log(slider)
 
-// nouislider.create(slider, {
-//   start: [20, 80],
-//   connect: true,
-//   range: {
-//     'min': 0,
-//     'max': 100
-//   }
-// })
+
+noUiSlider.create(slider, {
+  start: [0],
+  connect: [true, false],
+  range: {
+    'min': 0,
+    'max': 1
+  },
+  step: 0.1,
+
+
+});
+
+// let sliderToggle = slider.querySelector('.noUi-handle');
+
+
+
+slider.noUiSlider.on('change', function (values) {
+  console.log(slider.noUiSlider.get())
+  console.log(effectsList)
+})
+
+
 
 const effectsList = document.querySelector('.effects__list');
 

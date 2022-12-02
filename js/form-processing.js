@@ -35,5 +35,5 @@ function onCloseModal() {
 
 loadButton.addEventListener('click', onLoadImage)
 
-
+openModal()
 export { fileStorage };
