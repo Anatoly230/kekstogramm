@@ -1,7 +1,7 @@
 import { image } from './image-resize.js';
 // import { nouislider } from './nouislider/nouislider.js';
 
-var slider = document.getElementById('slider');
+const slider = document.getElementById('slider');
 
 // nouislider.create(slider, {
 //   start: [20, 80],

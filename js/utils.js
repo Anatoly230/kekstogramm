@@ -26,7 +26,6 @@ function getRandomNum(from = 1000, to = 0) {
     console.log(err)
     return false;
   }
-
 }
 
 function getRandomFloat(from = 1000, to = 0, countNum = 3) {
