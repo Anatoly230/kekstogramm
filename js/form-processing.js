@@ -19,6 +19,7 @@ function escapeClose(e) {
 function onLoadImage() {
   addZoom();
   addEffect();
+  
   fileStorage.addEventListener('change', openModal);
   cancelButton.addEventListener('click', onCloseModal);
   document.addEventListener('keydown', escapeClose);
