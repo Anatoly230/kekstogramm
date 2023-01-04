@@ -32,4 +32,10 @@ function removeZoom() {
   imageBigger.removeEventListener('click', increase)
 }
 
-export { addZoom, removeZoom, image}
+function chancePath(path) {
+  console.log(image);
+  console.log(image.src = URL.createObjectURL(path));
+  image.src = path;
+}
+
+export { addZoom, removeZoom, image, chancePath }

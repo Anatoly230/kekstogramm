@@ -16,7 +16,6 @@ const fullViewImage = document.querySelector('.big-picture'),
   modalClose = closeFullView(fullViewImage);
 let currentPicture;
 
-
 function IsEscape(e) {
   return e.key === 'Escape';
 }
