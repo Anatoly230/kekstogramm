@@ -1,34 +1,62 @@
 import { image } from './image-resize.js';
-// import { noUiSlider } from './nouislider/nouislider.js';
-
-const slider = document.querySelector('.effect-level__slider');
-
-
-
-noUiSlider.create(slider, {
-  start: [0],
-  connect: [true, false],
-  range: {
-    'min': 0,
-    'max': 1
-  },
-  step: 0.1,
-
-
-});
-
-slider.noUiSlider.on('change', function (values) {
-  console.log(slider.noUiSlider.get())
-  console.log(effectsList)
-})
+import { slider, resetSlider, changeStart, slideStatus } from './slider-generator.js';
 
 const effectsList = document.querySelector('.effects__list');
+const valueStarage = document.querySelector('.effect-level__value');
+
+function searchNeighbor(element) {
+  return element.parentElement.querySelector('.effects__preview');
+}
+
+function getFilter(element) {
+  return window.getComputedStyle(element).filter
+}
+
+function getFilterParameters(element) {
+  let filter = getFilter(searchNeighbor(element));
+  if (filter === 'none') {
+    return null;
+  }
+  return breakToComponents(filter)
+}
+
+function breakToComponents(str) {
+  if (str !== 'none') {
+    const decompose = /^(\D*)\((\d*)(\w*)?/gm;
+    const fined = decompose.exec(str);
+    return {
+      filter: fined[1],
+      value: fined[2],
+      measure: fined[3]
+    }
+  }
+}
+
+function addInnerStyle() {
+  if (getFilter(image) !== 'none') {
+    valueStarage.value = slider.noUiSlider.get();
+    let filterValue = getFilter(image);
+    let { filter, measure } = breakToComponents(filterValue);
+    measure = measure || '';
+    image.style.filter = `${filter}(${valueStarage.value}${measure})`;
+  }
+}
+
+function removeInnerStyle() {
+  image.style.filter = '';
+}
 
 function assignClass(e) {
+  image.style.filter = '';
   image.className = `effects__preview--${e.target.value}`;
+  slideStatus(e.target);
+  slider.noUiSlider.on('set', addInnerStyle)
 }
+
 function reAssignClass() {
   image.className = '';
+  removeInnerStyle();
+  resetSlider(0);
 }
 
 function addEffect() {
@@ -40,4 +68,7 @@ function removeEffect() {
   reAssignClass();
 }
 
-export { addEffect, removeEffect };
+
+
+
+export { addEffect, removeEffect, getFilterParameters };

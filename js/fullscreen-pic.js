@@ -98,12 +98,4 @@ function findTargetElem(e, parentClass) {
 }
 
 
-// images.forEach(function (image) {
-//   image.addEventListener('click', onFullScreenViewOPen)
-// })
-
-
-
-
-
 export { fullView, closeFullView, IsEscape };

@@ -7,7 +7,7 @@ const image = document.querySelector('.img-upload__preview').children[0];
 function decrease() {
   const value = imageSize.value.match(/\d*/)[0];
   if (value > 0) {
-    imageSize.value = Number(value) - 25 < 0 ? 0 + '%' : `${Number(value) - 25}%`;
+    imageSize.value = Number(value) - 25 < 25 ? 25 + '%' : `${Number(value) - 25}%`;
   }
   image.style.transform = `scale(${imageSize.value.match(/\d*/)[0] / 100})`
 }
@@ -15,7 +15,7 @@ function decrease() {
 function increase() {
   const value = imageSize.value.match(/\d*/)[0];
   if (value < 150) {
-    imageSize.value = Number(value) + 25 > 150 ? 150 + '%' : `${Number(value) + 25}%`;
+    imageSize.value = Number(value) + 25 > 100 ? 100 + '%' : `${Number(value) + 25}%`;
   }
   image.style.transform = `scale(${imageSize.value.match(/\d*/)[0] / 100})`
 }

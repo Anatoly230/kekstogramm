@@ -1,6 +1,8 @@
 import { fullView, closeFullView, IsEscape } from './fullscreen-pic.js';
 import { addZoom, removeZoom } from './image-resize.js';
 import { addEffect, removeEffect } from './add-effect.js';
+import { slider } from './slider-generator.js';
+import { hashtagStorage } from './hastag.js';
 
 const fileStorage = document.querySelector('#upload-file'),
   cancelButton = document.querySelector('#upload-cancel'),
@@ -16,10 +18,16 @@ function escapeClose(e) {
   }
 }
 
+function whatThePath(){
+  openModal();
+  console.dir(fileStorage.files)
+}
+
 function onLoadImage() {
   addZoom();
   addEffect();
-  fileStorage.addEventListener('change', openModal);
+  slider.setAttribute('disabled', true);
+  fileStorage.addEventListener('change', whatThePath);
   cancelButton.addEventListener('click', onCloseModal);
   document.addEventListener('keydown', escapeClose);
 }
@@ -35,5 +43,5 @@ function onCloseModal() {
 
 loadButton.addEventListener('click', onLoadImage);
 
-openModal();
+// openModal();
 export { fileStorage };

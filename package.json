@@ -3,6 +3,7 @@
   "version": "25.0.0",
   "private": true,
   "description": "Личный проект «{{projectTitle}}» от HTML Academy",
+  "homepage": "https://github.com/Anatoly230/baer",
   "repository": {
     "type": "git",
     "url": "{{sshUrl}}"
@@ -13,10 +14,12 @@
   "devDependencies": {
     "browser-sync": "^2.27.10",
     "eslint": "8.7.0",
-    "eslint-config-htmlacademy": "5.0.0"
+    "eslint-config-htmlacademy": "5.0.0",
+    "gh-pages": "^4.0.0",
   },
   "license": "MIT",
   "scripts": {
+    "deploy": "gh-pages -d dist-directory",
     "start": "browser-sync start --server --no-ui --files \"js/**/*.js, index.html\"",
     "lint": "eslint js/"
   },
