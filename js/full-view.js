@@ -1,6 +1,3 @@
-
-
-
 function IsEscape(e) {
   return e.key === 'Escape';
 }

@@ -1,8 +1,6 @@
 const slider = document.querySelector('.effect-level__slider');
 
-// function sliderGenerate(){
 
-// }
 noUiSlider.create(slider, {
   start: [0],
   connect: [true, false],
@@ -40,4 +38,15 @@ function resetSlider(value) {
   changeStep(Number(value) / 10)
 }
 
-export { slider, resetSlider, changeStart};
+function slideStatus(filterInfo) {
+  if (filterInfo !== null) {
+    let { value } = filterInfo;
+    slider.removeAttribute('disabled');
+    resetSlider(value);
+  } else {
+    slider.setAttribute('disabled', true)
+    changeStart(0);
+  }
+}
+
+export { slider, resetSlider, changeStart, slideStatus };

@@ -1,5 +1,5 @@
 import { image } from './image-resize.js';
-import { slider, resetSlider, changeStart, slideStatus } from './slider-generator.js';
+import { slider, resetSlider, slideStatus } from './slider-generator.js';
 
 const effectsList = document.querySelector('.effects__list');
 const valueStarage = document.querySelector('.effect-level__value');
@@ -7,6 +7,7 @@ const valueStarage = document.querySelector('.effect-level__value');
 function searchNeighbor(element) {
   return element.parentElement.querySelector('.effects__preview');
 }
+
 
 function getFilter(element) {
   return window.getComputedStyle(element).filter
@@ -49,7 +50,7 @@ function removeInnerStyle() {
 function assignClass(e) {
   image.style.filter = '';
   image.className = `effects__preview--${e.target.value}`;
-  slideStatus(e.target);
+  slideStatus(getFilterParameters(e.target));
   slider.noUiSlider.on('set', addInnerStyle)
 }
 
