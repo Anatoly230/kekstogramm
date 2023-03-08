@@ -97,4 +97,4 @@ function findTargetElem(e, parentClass) {
 }
 
 
-export { fullView, closeFullView, IsEscape };
+export { fullView, closeFullView, IsEscape, escapeClose};
