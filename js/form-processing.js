@@ -1,5 +1,5 @@
 import { IsEscape } from './full-view.js';
-import { escapeClose } from './fullscreen-pic.js';
+// import { escapeClose } from './fullscreen-pic.js';
 const form = document.querySelector('#upload-select-image');
 
 
@@ -95,12 +95,6 @@ function heshMaxLength(value) {
         return item.length <= 20;
     })
 }
-
-// function heshMinLength(value) {
-//     return itterator(value, function (item) {
-//         return item.length > 1;
-//     })
-// }
 
 function heshMinLength(value) {
     return itterator(value, function (item) {
