@@ -123,7 +123,6 @@ pristine.addValidator(hashTag, heshMinLength, 'Хештег не может со
 pristine.addValidator(hashTag, heshSpecCharacter, 'Спецсимволы !@#$&*% запрещены ', true)
 pristine.addValidator(comment, maxCommentLength, 'Длина комментария не может превышать 140 симоволов', true);
 
-console.log(pristine)
 form.addEventListener('submit', function (e) {
     e.preventDefault()
     let isValid = pristine.validate();

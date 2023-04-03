@@ -1,5 +1,5 @@
 import { getRangeNumbers, arrayCopy, detachFromArray, selectFromArray, getRandomNum, getObjects } from './utils.js';
-const countPhotos = 25;
+const countPhotos = 28;
 
 const MESSAGES = [
   'Всё отлично!',

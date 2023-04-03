@@ -1,5 +1,8 @@
+import { response } from './fetcher.js';
 import { rawPhotoData } from './data.js'
-
+console.log(response)
+const data = response ? response : rawPhotoData;
+console.log(data);
 const pictures = document.querySelector('.pictures'),
   template = document.querySelector('#picture').content.querySelector('.picture');
 
