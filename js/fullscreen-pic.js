@@ -44,13 +44,11 @@ function closeFullView(goal) {
 
 
 function fillData(sourceObj, data) {
-  // fullViewImage.querySelector('.social__comment-count').classList.add('hidden');
-  // fullViewImage.querySelector('.social__comments-loader').classList.add('hidden');
+
   fullViewImage.querySelector('img').src = sourceObj.querySelector('.picture__img').src;
   fullViewImage.querySelector('.likes-count').textContent = sourceObj.querySelector('.picture__likes').textContent;
   fullViewImage.querySelector('.comments-count').textContent = sourceObj.querySelector('.picture__comments').textContent;
-  // fullViewImage.querySelector('.social__caption').textContent = data.description;
-  fullViewImage.querySelector('.social__comments-loader').addEventListener('click', restrictComments);
+   fullViewImage.querySelector('.social__comments-loader').addEventListener('click', restrictComments);
 
 }
 
@@ -138,4 +136,4 @@ function findTargetElem(e, parentClass) {
 }
 
 
-export { fullView, closeFullView, IsEscape, escapeClose };
+export { fullView, closeFullView, IsEscape, escapeClose, modalClose};

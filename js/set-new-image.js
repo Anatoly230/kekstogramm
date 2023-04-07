@@ -74,4 +74,4 @@ loadButton.addEventListener('click', onLoadImage);
 
 // openModal()
 // onLoadImage()
-export { fileStorage };
+export { fileStorage, onCloseModal };

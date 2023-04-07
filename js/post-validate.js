@@ -1,5 +1,5 @@
 import { IsEscape } from './full-view.js';
-// import { escapeClose } from './fullscreen-pic.js';
+
 const form = document.querySelector('#upload-select-image');
 
 
@@ -123,13 +123,4 @@ pristine.addValidator(hashTag, heshMinLength, 'Хештег не может со
 pristine.addValidator(hashTag, heshSpecCharacter, 'Спецсимволы !@#$&*% запрещены ', true)
 pristine.addValidator(comment, maxCommentLength, 'Длина комментария не может превышать 140 симоволов', true);
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault()
-    let isValid = pristine.validate();
-    if (isValid) {
-        form.reset();
-    }
-
-})
-
-export { form };
+export { form, pristine };

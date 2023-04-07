@@ -1,8 +1,8 @@
-import { response } from './fetcher.js';
-import { rawPhotoData } from './data.js'
-console.log(response)
-const data = response ? response : rawPhotoData;
-console.log(data);
+import { rawPhotoData } from './data.js';
+// import { promData } from './xmlHttpRequest.js';
+import { getRemoteContent } from './fetcher.js';
+
+
 const pictures = document.querySelector('.pictures'),
   template = document.querySelector('#picture').content.querySelector('.picture');
 
@@ -63,7 +63,57 @@ function addToDOM(parent, sample, datas, classesAndValues) {
   parent.appendChild(elementStorage)
 };
 
-addToDOM(pictures, template, rawPhotoData, changeInfo);
+function getRendPhotos(data) {
+  if (data) {
+    addToDOM(pictures, template, data, changeInfo)
+  }
+}
 
-export { addToDOM, changeDOM };
+
+function popUpMessage(strMessage = 'Что-то пошло не так( Ошибка загрузки изоражений') {
+  const pageBody = document.querySelector('body');
+  const messageBody = document.createElement('div');
+  const messageWindow = document.createElement('div');
+  const message = document.createElement('p');
+  message.textContent = strMessage;
+  messageBody.style.position = 'fixed';
+  messageBody.style.zIndex = '100';
+  messageBody.style.top = '0';
+  messageBody.style.width = '100vw';
+  messageBody.style.height = '100vh';
+  messageBody.style.display = 'flex';
+  messageBody.style.justifyContent = 'center';
+  messageBody.style.alignItems = 'center';
+  messageBody.style.backgroundColor = 'rgba(50,50,50, .9)';
+  messageWindow.style.justifyContent = 'center';
+  messageWindow.style.alignItems = 'center';
+  messageWindow.style.color = 'black';
+  messageWindow.style.backgroundColor = 'white';
+  messageWindow.style.padding = '50px 20px';
+  messageWindow.style.maxWidth = '350px';
+  messageWindow.style.border = '1px solid black';
+  messageWindow.style.borderRadius = '10px';
+  messageWindow.appendChild(message);
+  messageBody.appendChild(messageWindow);
+  pageBody.appendChild(messageBody)
+
+  setTimeout(function () {
+    messageBody.remove();
+  }, 3000)
+}
+
+
+
+// promData.then(function (data) {
+//   addToDOM(pictures, template, data, changeInfo);
+// })
+// .catch(function(){
+//   console.log(rawPhotoData);
+//   addToDOM(pictures, template, rawPhotoData, changeInfo);
+// })
+getRemoteContent()
+  .then(getRendPhotos)
+  .catch(popUpMessage)
+
+export { addToDOM, changeDOM, popUpMessage };
 
