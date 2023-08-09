@@ -126,10 +126,10 @@
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                  <input  class="text__hashtags" name="hashtags" placeholder="#ХэшТег" type="text" >
+                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
                 </fieldset>
-
+                <!-- pattern="/^#{1}[а-яА-ЯёЁa-zA-Z0-9]+$/gm" -->
                 <!-- Кнопка для отправки данных на сервер -->
                 <button type="submit" class="img-upload__submit" id="upload-submit">Опубликовать</button>
               </div>
@@ -248,9 +248,9 @@
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
+  <script src="./js/pristine/pristine.js"></script>
   <script src="./js/nouislider/nouislider.js"></script>
   <script type="module" src="./js/main.js"></script>
-  <script src="./js/pristine/pristine.js"></script>
 
 </body>
 

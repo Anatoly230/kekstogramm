@@ -16,7 +16,6 @@ const fullViewImage = document.querySelector('.big-picture'),
   modalClose = closeFullView(fullViewImage);
 let currentPicture;
 
-
 function IsEscape(e) {
   return e.key === 'Escape';
 }
@@ -45,12 +44,12 @@ function closeFullView(goal) {
 
 
 function fillData(sourceObj, data) {
-  fullViewImage.querySelector('.social__comment-count').classList.add('hidden');
-  fullViewImage.querySelector('.social__comments-loader').classList.add('hidden');
+
   fullViewImage.querySelector('img').src = sourceObj.querySelector('.picture__img').src;
   fullViewImage.querySelector('.likes-count').textContent = sourceObj.querySelector('.picture__likes').textContent;
   fullViewImage.querySelector('.comments-count').textContent = sourceObj.querySelector('.picture__comments').textContent;
-  fullViewImage.querySelector('.social__caption').textContent = data.description;
+   fullViewImage.querySelector('.social__comments-loader').addEventListener('click', restrictComments);
+
 }
 
 function fillComments(data) {
@@ -60,12 +59,51 @@ function fillComments(data) {
   addToDOM(commentHome, commentTemplate, data.comments, commentsInfo);
 }
 
+function initialCountOfComments() {
+  const initialCount = 5;
+  const comments = fullViewImage.querySelectorAll('.social__comment');
+  refreshCommentsCount(initialCount)
+  if (comments.length > initialCount) {
+    for (let i = initialCount; i < comments.length; i++) {
+      comments[i].classList.add('hidden');
+    }
+  }
+}
+
+function restrictComments() {
+  let onDisplay = 0;
+  const comments = fullViewImage.querySelectorAll('.social__comment');
+  comments.forEach(function (item) {
+    onDisplay = !item.classList.contains('hidden') ? onDisplay + 1 : onDisplay;
+  })
+  if (onDisplay < comments.length) {
+    if (onDisplay + 5 <= comments.length) {
+      for (let i = onDisplay; i < onDisplay + 5; i++) {
+        comments[i].classList.remove('hidden');
+        refreshCommentsCount(onDisplay + 5)
+      }
+    } else {
+      for (let i = onDisplay; i < comments.length; i++) {
+        comments[i].classList.remove('hidden');
+        refreshCommentsCount(comments.length);
+        // this.style.display = 'none';
+      }
+    }
+  }
+
+}
+
+function refreshCommentsCount(count) {
+  const commentsOf = document.querySelector('.social__comment-count')
+  commentsOf.firstChild.nodeValue = `${count} из `
+}
 
 function onFullScreenViewOPen(elem) {
   const photoId = elem.querySelector('.picture__comments').dataset.id,
     photoInfo = searchPhotoId(rawPhotoData, photoId)
   fillData(elem, photoInfo);
   fillComments(photoInfo)
+  initialCountOfComments();
   modalOpen();
   cancelBtn.addEventListener('click', onFullScreenViewClose);
   document.querySelector('body').addEventListener('keydown', escapeClose);
@@ -98,4 +136,4 @@ function findTargetElem(e, parentClass) {
 }
 
 
-export { fullView, closeFullView, IsEscape };
+export { fullView, closeFullView, IsEscape, escapeClose, modalClose};

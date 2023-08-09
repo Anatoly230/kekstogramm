@@ -27,9 +27,8 @@ function addZoom() {
   imageBigger.addEventListener('click', increase)
 }
 function removeZoom() {
-
   imageSmaller.removeEventListener('click', decrease)
   imageBigger.removeEventListener('click', increase)
 }
 
-export { addZoom, removeZoom, image}
+export { addZoom, removeZoom, image }

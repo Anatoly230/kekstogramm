@@ -439,7 +439,7 @@
 
   Pristine.setLocale = function (locale) {
     currentLocale = Object.keys(lang).includes(locale) ? locale : currentLocale;
-    console.log("Вы ввели язык, которого нет в бибилиотеке: метод .setLocale - ошибка")
+    // console.log("Вы ввели язык, которого нет в бибилиотеке: метод .setLocale - ошибка")
   };
 
   return Pristine;

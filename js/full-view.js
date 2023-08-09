@@ -1,6 +1,3 @@
-
-
-
 function IsEscape(e) {
   return e.key === 'Escape';
 }
@@ -19,3 +16,5 @@ function closeFullView(goal) {
     document.querySelector('body').classList.remove('modal-open');
   }
 }
+
+export { IsEscape };
